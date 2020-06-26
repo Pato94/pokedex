@@ -28,10 +28,14 @@
 
 <style scoped>
     .container {
-        width: 250px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+        background-size:cover;
+        margin: 20px;
+        text-align: center;
+    }
+    .container:after{
+        content:'';
+        display:block;
+        padding-top: calc(50% / (16/10));
     }
 
     .sprite {
@@ -56,7 +60,7 @@
 
     .types {
         margin: 10px 0;
-        display: flex;
+        display:flex;
     }
 
     .type {

@@ -18,5 +18,12 @@
 </script>
 
 <style scoped>
+.pokemons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit , minmax(300px, 1fr));
+    grid-gap: 1rem;
+    grid-auto-flow: dense;
+    padding: 1rem;
+}
 
 </style>
