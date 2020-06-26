@@ -1,13 +1,11 @@
 <template>
-    <div>
-    <img :src="pokemon.sprites.front_default" style=margin-top:20px>
-    <h5 style="color: #919191">N 00{{ pokemon.id }}</h5>
-    <div style="font-style: italic">
-        {{ pokemon.name }}
-    </div>
-    <div>
-       <a style="background-color:#9bcc50 ;width:10px;border-radius:5px;">planta </a>
-       <a style="background-color:purple ; width:10px;color:white;border-radius:5px;"> veneno </a>
+    <div class="container">
+        <img class="sprite" :src="pokemon.sprites.front_default">
+        <p class="id">N 00{{ pokemon.id }}</p>
+        <p class="name">{{ pokemon.name }}</p>
+        <div class="types">
+            <p v-for="type in types" :key="type" class="type" :class="type">{{ type }}</p>
+        </div>
     </div>
 </template>
 
@@ -16,10 +14,77 @@
         name: "Pokemon",
         props: {
             pokemon: Object
+        },
+        computed: {
+            types: function() {
+                return this.pokemon.types.map(t => t.type.name)
+            }
         }
     }
 </script>
 
 <style scoped>
+    .container {
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
+    .sprite {
+        display: block;
+        background: #f2f2f2;
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .id {
+        color: #919191;
+        margin: 4px 0 0 0;
+    }
+
+    .name {
+        color: #313131;
+        font-size: 1.5em;
+        margin: 10px 0 0 0;
+        text-transform: capitalize;
+    }
+
+    .types {
+        margin: 10px 0;
+        display: flex;
+    }
+
+    .type {
+        min-width: 110px;
+        padding: 4px;
+        margin: 0 8px 0 0;
+        border-radius: 5px;
+        text-transform: capitalize;
+    }
+
+    .grass {
+        background: #9bcc55;
+    }
+
+    .poison {
+        background: #b97fc9;
+    }
+
+    .fire {
+        background: #fd7d24;
+    }
+
+    .flying {
+        background: #3dc7ef;
+    }
+
+    .water {
+        background: #4592c4;
+    }
+
+    .bug {
+        background: #729f3f;
+    }
 </style>
