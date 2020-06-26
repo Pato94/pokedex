@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <img class="sprite" :src="pokemon.sprites.front_default">
-        <p class="id">N 00{{ pokemon.id }}</p>
+        <p class="id">{{ number }}</p>
         <p class="name">{{ pokemon.name }}</p>
         <div class="types">
             <p v-for="type in types" :key="type" class="type" :class="type">{{ type }}</p>
@@ -18,6 +18,9 @@
         computed: {
             types: function() {
                 return this.pokemon.types.map(t => t.type.name)
+            },
+            number: function() {
+                return "#" + this.pokemon.id.toString().padStart(3, "0")
             }
         }
     }
