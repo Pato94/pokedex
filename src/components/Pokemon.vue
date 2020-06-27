@@ -28,12 +28,12 @@
 
 <style scoped>
     .container {
-        width: 250px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        background-size:cover;
     }
-
+    
     .sprite {
         display: block;
         background: #f2f2f2;
