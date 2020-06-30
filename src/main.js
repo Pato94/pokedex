@@ -8,9 +8,10 @@ Vue.use(VueRouter)
 Vue.config.productionTip = false
 
 const router = new VueRouter({
+  mode: 'history',
   routes: [
     { path: '/', component: Home },
-    { path: '/pokemon/:id', component: PokemonDetail }
+    { name: 'pokemon', path: '/pokemon/:id', component: PokemonDetail }
   ]
 })
 

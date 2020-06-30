@@ -1,16 +1,14 @@
 <template>
-    //el tag div me ayudo a que no se altere el css por default 
-    //que me da el router-link
-    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Bad_regexp_flag
-    //este pokemon.id me da problemas
-     <router-link :to="/pokemon/pokemon.id" tag="div"><div class="container">
-        <img class="sprite" :src="pokemon.sprites.front_default">
-        <p class="id">{{ number }}</p>
-        <p class="name">{{ pokemon.name }}</p>
-        <div class="types">
-            <p v-for="type in types" :key="type" class="type" :class="type">{{ type }}</p>
+    <router-link :to="{ name: 'pokemon', params: { id: pokemon.id }}" tag="div">
+        <div class="container">
+            <img class="sprite" :src="pokemon.sprites.front_default">
+            <p class="id">{{ number }}</p>
+            <p class="name">{{ pokemon.name }}</p>
+            <div class="types">
+                <p v-for="type in types" :key="type" class="type" :class="type">{{ type }}</p>
+            </div>
         </div>
-    </div></router-link>
+    </router-link>
 </template>
 
 <script>
@@ -20,10 +18,10 @@
             pokemon: Object
         },
         computed: {
-            types: function() {
+            types: function () {
                 return this.pokemon.types.map(t => t.type.name)
             },
-            number: function() {
+            number: function () {
                 return "#" + this.pokemon.id.toString().padStart(3, "0")
             }
         }
@@ -35,9 +33,9 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        background-size:cover;
+        background-size: cover;
     }
-    
+
     .sprite {
         display: block;
         background: #f2f2f2;
