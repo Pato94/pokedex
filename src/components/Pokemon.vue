@@ -1,12 +1,16 @@
 <template>
-    <div class="container">
+    //el tag div me ayudo a que no se altere el css por default 
+    //que me da el router-link
+    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Bad_regexp_flag
+    //este pokemon.id me da problemas
+     <router-link :to="/pokemon/pokemon.id" tag="div"><div class="container">
         <img class="sprite" :src="pokemon.sprites.front_default">
         <p class="id">{{ number }}</p>
         <p class="name">{{ pokemon.name }}</p>
         <div class="types">
             <p v-for="type in types" :key="type" class="type" :class="type">{{ type }}</p>
         </div>
-    </div>
+    </div></router-link>
 </template>
 
 <script>

@@ -1,6 +1,7 @@
 <template>
     <div id="app">
-        <h1>Pokedex application</h1>
+        <router-view/>
+        <router-link to="/" style="text-decoration: none !important; color:inherit;outline:none;"><h1>Pokedex application</h1></router-link>
         <pokemon-grid v-if="pokemons != null" :pokemons="pokemons"/>
     </div>
 </template>
