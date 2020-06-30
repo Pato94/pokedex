@@ -10,7 +10,7 @@ Vue.config.productionTip = false
 const router = new VueRouter({
   routes: [
     { path: '/', component: Home },
-    { path: '/pokemon/:id', component: PokemonDetail }
+    { path: '/pokemon/:id', component: PokemonDetail, name: 'details' }
   ]
 })
 
