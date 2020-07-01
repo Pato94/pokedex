@@ -1,9 +1,5 @@
 <template>
-    //el tag div me ayudo a que no se altere el css por default 
-    //que me da el router-link
-    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Bad_regexp_flag
-    //este pokemon.id me da problemas
-     <router-link :to="/pokemon/pokemon.id" tag="div"><div class="container">
+     <router-link :to="{ name: 'details', params: { id: pokemon.id }}" tag= 'div'><div class="container">
         <img class="sprite" :src="pokemon.sprites.front_default">
         <p class="id">{{ number }}</p>
         <p class="name">{{ pokemon.name }}</p>
