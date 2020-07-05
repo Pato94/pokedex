@@ -2,7 +2,7 @@
   <div v-if="pokemon != null" class="container">
     <p class="name">{{ pokemon.name }} {{ number }}</p>
     <div class="photo-and-details">
-      <img class="photo" :src="pokemon.sprites.front_default" />
+      <img class="photo" :src="pokemon.image" />
       <div class="details">
         <p v-if="description != null">{{ description }}</p>
         <div class="features">
@@ -70,38 +70,28 @@ import axios from "axios";
 
 const getPokemonData = id => {
   return axios
-    .get(`https://pokeapi.co/api/v2/pokemon/${id}`)
-
+    .get(`http://localhost:3000/pokemons/${id}`)
     .then(response => response.data);
-};
-
-const getPokemonDescription = id => {
-  return axios
-    .get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
-    .then(response => {
-      console.log("TAKA");
-      console.log(response);
-      return response;
-    })
-    .then(response => response.data.flavor_text_entries[0].flavor_text);
 };
 
 export default {
   name: "PokemonDetail",
   data() {
     return {
-      pokemon: null,
-      description: null
+      pokemon: null
     };
   },
   created() {
     console.log(this.$route.params.id);
     getPokemonData(this.$route.params.id).then(data => (this.pokemon = data));
-    getPokemonDescription(this.$route.params.id).then(
-      data => (this.description = data)
-    );
   },
   computed: {
+    description: function() {
+      if (this.pokemon == null) {
+        return "";
+      }
+      return this.pokemon.description;
+    },
     number: function() {
       let paddedNumber = this.pokemon.id.toString().padStart(3, "0");
       return `#${paddedNumber}`;
@@ -111,43 +101,43 @@ export default {
       if (pokemon == null) {
         return "";
       }
-      return `${pokemon.height} m`;
+      return pokemon.height;
     },
     category: function() {
       const pokemon = this.pokemon;
       if (pokemon == null) {
         return "";
       }
-      return pokemon.types[0].type.name;
+      return pokemon.category;
     },
     weight: function() {
       const pokemon = this.pokemon;
       if (pokemon == null) {
         return "";
       }
-      return `${pokemon.weight} kg`;
+      return pokemon.weight;
     },
     ability: function() {
       const pokemon = this.pokemon;
       if (pokemon == null) {
         return "";
       }
-      return pokemon.abilities[0].ability.name;
+      return pokemon.ability;
     },
     types: function() {
-      return this.pokemon.types.map(t => t.type.name);
+      return this.pokemon.types.map(t => t.toLowerCase());
     },
     statVida: function() {
-      return this.pokemon.stats[0].base_stat;
+      return this.pokemon.ps;
     },
     statAtaque: function() {
-      return this.pokemon.stats[1].base_stat;
+      return this.pokemon.attack;
     },
     statDefensa: function() {
-      return this.pokemon.stats[2].base_stat;
+      return this.pokemon.defense;
     },
     statVelocidad: function() {
-      return this.pokemon.stats[5].base_stat;
+      return this.pokemon.speed;
     }
   }
 };
@@ -236,27 +226,27 @@ export default {
   padding-bottom: 10px;
 }
 
-.grass {
+.planta {
   background: #9bcc55;
 }
 
-.poison {
+.veneno {
   background: #b97fc9;
 }
 
-.fire {
+.fuego {
   background: #fd7d24;
 }
 
-.flying {
+.volador {
   background: #3dc7ef;
 }
 
-.water {
+.agua {
   background: #4592c4;
 }
 
-.bug {
+.bicho {
   background: #729f3f;
 }
 </style>
