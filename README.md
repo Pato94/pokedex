@@ -1,24 +1,7 @@
-# hello-world
+Welcome to the Pokedex Project!
 
-## Project setup
-```
-npm install
-```
+We now have two different sub-projects.
+- An express api located under `api/`
+- A VueJS frontend located under `frontend/`
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+This is a work in progress, so the easiest way of having it running for development is going to each folder and follow the instructions for each project in the README.md
