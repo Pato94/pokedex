@@ -22,7 +22,8 @@
                 return this.pokemon.types.map(t => t.type.name)
             },
             number: function () {
-                return "#" + this.pokemon.id.toString().padStart(3, "0")
+                let paddedNumber = this.pokemon.id.toString().padStart(3, "0");
+                return `#${paddedNumber}`
             }
         }
     }
