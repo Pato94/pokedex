@@ -35,8 +35,29 @@
           </div>
         </div>
         <div class="stats">
-          <h2 style="text-align:left;">Puntos de base</h2>
-          <div class="stat"></div>
+          <h2 style="padding-top:10px">Puntos de base</h2>
+          <div class="grilla">
+            <div class="stat">
+              <span class="nombre">Vida</span>
+              <br />
+              <span class="valor">{{statVida}}</span>
+            </div>
+            <div class="stat">
+              <span class="nombre">Ataque</span>
+              <br />
+              <span class="valor">{{statAtaque}}</span>
+            </div>
+            <div class="stat">
+              <span class="nombre">Defensa</span>
+              <br />
+              <span class="valor">{{statDefensa}}</span>
+            </div>
+            <div class="stat">
+              <span class="nombre">Velocidad</span>
+              <br />
+              <span class="valor">{{statVelocidad}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -112,6 +133,18 @@ export default {
     types: function() {
       return this.pokemon.types.map(t => t.type.name);
     },
+    statVida: function() {
+      return this.pokemon.stats[0].base_stat;
+    },
+    statAtaque: function() {
+      return this.pokemon.stats[1].base_stat;
+    },
+    statDefensa: function() {
+      return this.pokemon.stats[2].base_stat;
+    },
+    statVelocidad: function() {
+      return this.pokemon.stats[5].base_stat;
+    }
   }
 };
 </script>
@@ -161,6 +194,7 @@ export default {
 .types {
   margin: 10px 0;
   display: flex;
+  justify-content: center;
 }
 
 .type {
@@ -172,37 +206,53 @@ export default {
 }
 
 .stats {
-  opacity:1;
-  background-color:#a4a4a4;
+  background-color: #a4a4a4;
+  border-radius: 25px;
+}
+
+.grilla {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  flex: 1 1 0;
+  padding: 10px 40px;
+}
+
+.stat {
+  display: flex;
+  flex-basis: 50%;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-bottom: 10px;
 }
 
 .grass {
   background: #9bcc55;
-  color:white;
+  color: white;
 }
 
 .poison {
   background: #b97fc9;
-  color:white;
+  color: white;
 }
 
 .fire {
   background: #fd7d24;
-  color:white;
+  color: white;
 }
 
 .flying {
   background: #3dc7ef;
-  color:white;
+  color: white;
 }
 
 .water {
   background: #4592c4;
-  color:white;
+  color: white;
 }
 
 .bug {
   background: #729f3f;
-  color:white;
+  color: white;
 }
 </style>
