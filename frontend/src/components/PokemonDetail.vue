@@ -28,7 +28,7 @@
         </div>
         <div>
           <div class="types">
-            <h2>Tipos</h2>
+            <h2>Tipo</h2>
           </div>
           <div class="types">
             <p v-for="type in types" :key="type" class="type" :class="type">{{ type }}</p>
@@ -36,27 +36,27 @@
         </div>
         <div class="stats">
           <h2 style="padding-top:10px">Puntos de base</h2>
-          <div class="grilla">
-            <div class="stat">
-              <span class="nombre">Vida</span>
-              <br />
-              <span class="valor">{{statVida}}</span>
-            </div>
-            <div class="stat">
-              <span class="nombre">Ataque</span>
-              <br />
-              <span class="valor">{{statAtaque}}</span>
-            </div>
-            <div class="stat">
-              <span class="nombre">Defensa</span>
-              <br />
-              <span class="valor">{{statDefensa}}</span>
-            </div>
-            <div class="stat">
-              <span class="nombre">Velocidad</span>
-              <br />
-              <span class="valor">{{statVelocidad}}</span>
-            </div>
+        <div class= "grilla">
+          <div class="stat">
+            <span class="nombre">Vida</span>
+            <br />
+            <span class="valor">{{statVida}}</span>
+          </div>
+          <div class="stat">
+            <span class="nombre">Ataque</span>
+            <br />
+            <span class="valor">{{statAtaque}}</span>
+          </div>
+          <div class="stat">
+            <span class="nombre">Defensa</span>
+            <br />
+            <span class="valor">{{statDefensa}}</span>
+          </div>
+          <div class="stat">
+            <span class="nombre">Velocidad</span>
+            <br />
+            <span class="valor">{{statVelocidad}}</span>
+          </div>
           </div>
         </div>
       </div>
@@ -67,11 +67,14 @@
 
 <script>
 import axios from "axios";
+
 const getPokemonData = id => {
   return axios
     .get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+
     .then(response => response.data);
 };
+
 const getPokemonDescription = id => {
   return axios
     .get(`https://pokeapi.co/api/v2/pokemon-species/${id}/`)
@@ -82,6 +85,7 @@ const getPokemonDescription = id => {
     })
     .then(response => response.data.flavor_text_entries[0].flavor_text);
 };
+
 export default {
   name: "PokemonDetail",
   data() {
@@ -154,20 +158,24 @@ export default {
   text-transform: capitalize;
   font-size: 3rem;
 }
+
 .photo-and-details {
   display: flex;
   flex-direction: row;
   padding: 10px;
 }
+
 .photo {
   width: 50%;
   margin-right: 10px;
   background: #f2f2f2;
 }
+
 .details {
   width: 50%;
   font-size: 1.5rem;
 }
+
 .features {
   font-size: 1.2rem;
   background: #2fa7d7;
@@ -178,15 +186,18 @@ export default {
   flex: 1 1 0;
   padding: 10px 40px;
 }
+
 .feature {
   display: flex;
   flex-basis: 50%;
   align-items: flex-start;
   flex-direction: column;
 }
+
 .title {
   color: white;
 }
+
 .content {
   color: black;
 }
@@ -209,7 +220,6 @@ export default {
   background-color: #a4a4a4;
   border-radius: 25px;
 }
-
 .grilla {
   display: flex;
   flex-wrap: wrap;
@@ -228,31 +238,25 @@ export default {
 
 .grass {
   background: #9bcc55;
-  color: white;
 }
 
 .poison {
   background: #b97fc9;
-  color: white;
 }
 
 .fire {
   background: #fd7d24;
-  color: white;
 }
 
 .flying {
   background: #3dc7ef;
-  color: white;
 }
 
 .water {
   background: #4592c4;
-  color: white;
 }
 
 .bug {
   background: #729f3f;
-  color: white;
 }
 </style>
