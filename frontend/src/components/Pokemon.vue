@@ -1,7 +1,7 @@
 <template>
   <router-link :to="{ name: 'pokemon', params: { id: pokemon.id }}" tag="div">
     <div class="container">
-      <img class="sprite" :src="pokemon.sprites.front_default" />
+      <img class="sprite" :src="pokemon.image" />
       <p class="id">{{ number }}</p>
       <p class="name">{{ pokemon.name }}</p>
       <div class="types">
@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     types: function() {
-      return this.pokemon.types.map(t => t.type.name);
+      return this.pokemon.types.map(t => t.toLowerCase());
     },
     number: function() {
       let paddedNumber = this.pokemon.id.toString().padStart(3, "0");
@@ -70,27 +70,27 @@ export default {
   text-transform: capitalize;
 }
 
-.grass {
+.planta {
   background: #9bcc55;
 }
 
-.poison {
+.veneno {
   background: #b97fc9;
 }
 
-.fire {
+.fuego {
   background: #fd7d24;
 }
 
-.flying {
+.volador {
   background: #3dc7ef;
 }
 
-.water {
+.agua {
   background: #4592c4;
 }
 
-.bug {
+.bicho {
   background: #729f3f;
 }
 </style>

@@ -11,10 +11,10 @@
     import PokemonGrid from "./PokemonGrid"
     import axios from "axios"
 
-    const getPokemonData = name => {
-        return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-            .then(response => response.data)
-    }
+    // const getPokemonData = name => {
+    //     return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    //         .then(response => response.data)
+    // }
     export default {
         name: "Home",
         components: {
@@ -26,16 +26,16 @@
             }
         },
         mounted() {
-            axios.get("https://pokeapi.co/api/v2/pokemon?limit=10")
+            axios.get("http://localhost:3000/pokemons")
+                // .then(response => {
+                //     const promises = response.data.results.map(poke => {
+                //         return getPokemonData(poke.name)
+                //     });
+                //     return Promise.all(promises)
+                // })
                 .then(response => {
-                    const promises = response.data.results.map(poke => {
-                        return getPokemonData(poke.name)
-                    });
-                    return Promise.all(promises)
-                })
-                .then(pokemons => {
-                    console.log(pokemons)
-                    this.pokemons = pokemons
+                    console.log(response.data)
+                    this.pokemons = response.data
                 })
         }
     }
