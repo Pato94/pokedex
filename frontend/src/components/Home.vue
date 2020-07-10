@@ -10,11 +10,8 @@
 <script>
     import PokemonGrid from "./PokemonGrid"
     import axios from "axios"
+    const API_URL = process.env.VUE_APP_API_URL
 
-    // const getPokemonData = name => {
-    //     return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    //         .then(response => response.data)
-    // }
     export default {
         name: "Home",
         components: {
@@ -26,13 +23,7 @@
             }
         },
         mounted() {
-            axios.get("http://localhost:3000/pokemons")
-                // .then(response => {
-                //     const promises = response.data.results.map(poke => {
-                //         return getPokemonData(poke.name)
-                //     });
-                //     return Promise.all(promises)
-                // })
+            axios.get(`${API_URL}/pokemons`)
                 .then(response => {
                     console.log(response.data)
                     this.pokemons = response.data
