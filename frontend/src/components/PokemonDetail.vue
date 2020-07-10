@@ -67,10 +67,11 @@
 
 <script>
 import axios from "axios";
+const API_URL = process.env.VUE_APP_API_URL
 
 const getPokemonData = id => {
   return axios
-    .get(`http://localhost:3000/pokemons/${id}`)
+    .get(`${API_URL}/pokemons/${id}`)
     .then(response => response.data);
 };
 
@@ -93,6 +94,9 @@ export default {
       return this.pokemon.description;
     },
     number: function() {
+      if (this.pokemon === null || !this.pokemon.id) {
+        return "";
+      }
       let paddedNumber = this.pokemon.id.toString().padStart(3, "0");
       return `#${paddedNumber}`;
     },
@@ -125,6 +129,9 @@ export default {
       return pokemon.ability;
     },
     types: function() {
+      if (this.pokemon == null || !this.pokemon.types) {
+        return []
+      }
       return this.pokemon.types.map(t => t.toLowerCase());
     },
     statVida: function() {
