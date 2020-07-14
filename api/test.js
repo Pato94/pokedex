@@ -45,4 +45,20 @@ describe("Api works", () => {
                 done()
             })
     })
+
+    it("can login with a registered account", (done) => {
+        chai.request(app)
+            .post("/register")
+            .send({username: "pato", password: "secret"})
+            .end((err, res) => {
+                chai.request(app)
+                    .post("/login")
+                    .send({username: "pato", password: "secret"})
+                    .end((err, res) => {
+                        res.should.have.status(200)
+                        res.body.token.should.not.be.undefined
+                        done()
+                    })
+            })
+    })
 })
