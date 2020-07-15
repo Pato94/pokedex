@@ -4,7 +4,7 @@
     <h1>Sign up</h1>
     <input type="text" name="" placeholder="Username">
     <input type="password" name="" placeholder="password">
-    <input type="submit" name="" value="Login">
+    <input type="submit" name="" value="Sign up">
     </form>
 </div>
 </template>
