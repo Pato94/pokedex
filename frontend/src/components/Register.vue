@@ -1,9 +1,9 @@
-<template class="body">
-<div class="container">
+<template>
+<div class="cuadro">
   <form class="box" method="post">
     <h1>Sign up</h1>
     <input type="text" name="" placeholder="Username">
-    <input type="password" name="" placeholder="password">
+    <input type="password" name="" placeholder="Password">
     <input type="submit" name="" value="Sign up">
     </form>
 </div>
@@ -13,7 +13,7 @@
 </script>
 
  <style>
-.container {
+.cuadro {
   position: fixed;
   top: 0;
   left: 0;
