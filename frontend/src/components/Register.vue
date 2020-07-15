@@ -1,5 +1,5 @@
 <template>
-<div class="cuadro">
+<div class="caja">
   <form class="box" method="post">
     <h1>Sign up</h1>
     <input type="text" name="" placeholder="Username">
@@ -13,7 +13,7 @@
 </script>
 
  <style>
-.cuadro {
+.caja {
   position: fixed;
   top: 0;
   left: 0;
