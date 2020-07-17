@@ -1,15 +1,37 @@
 <template>
-<div class="caja">
-  <form class="box" method="post">
-    <h1>Sign up</h1>
-    <input type="text" name="" placeholder="Username">
-    <input type="password" name="" placeholder="Password">
-    <input type="submit" name="" value="Sign up">
+  <div class="caja">
+    <form class="box" method="post">
+      <h1>Sign up</h1>
+      <input type="text" id="username" name placeholder="Username" />
+      <input type="password" id="password" name placeholder="Password" />
+      <button class="submit" v-on:click="datos()">Di que</button>
     </form>
-</div>
+  </div>
 </template>
 
 <script>
+const express = require("express")
+const router = express.Router()
+const accounts = []
+
+ export default {
+   name: "Register",
+  datos: function() {
+    const username = document.getElementById("username")
+    const password = document.getElementById("password")
+    if ( username == undefined || password == undefined ){
+      console.log("llena bien los campos")
+    }
+    else { 
+      router.post("/register", (req, res) => {
+        accounts.push({username: username, password: password})
+        res.status(201).end()
+        console.log("cuenta creada")
+})
+    }
+    return
+  }
+ }
 </script>
 
  <style>
@@ -36,7 +58,6 @@
   color: white;
   text-transform: uppercase;
   font-weight: 500;
-
 }
 .box input[type = "text"], .box input[type="password"]{
   border: 0;
@@ -56,7 +77,7 @@
   width: 280px;
   border-color: #2ecc71;
 }
-.box input[type= "submit"]{
+.submit {
   border: 0;
   background: none;
   display: block;
@@ -70,8 +91,7 @@
   transition: 0.25s;
   cursor: pointer;
 }
-.box input[type="submit"]:hover{
+.submit:hover {
   background: #2ecc71;
-
 }
 </style>
