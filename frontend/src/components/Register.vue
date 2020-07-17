@@ -2,8 +2,8 @@
   <div class="caja">
     <form class="box" method="post">
       <h1>Sign up</h1>
-      <input type="text" id="username" name placeholder="Username" />
-      <input type="password" id="password" name placeholder="Password" />
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
       <button class="submit" v-on:click="datos()">Di que</button>
     </form>
   </div>
