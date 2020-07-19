@@ -1,37 +1,43 @@
 <template>
   <div class="caja">
-    <form class="box" method="post">
+    <form @submit.prevent="formSubmit()" class="box">
       <h1>Sign up</h1>
-      <input type="text" id="username" name placeholder="Username" />
-      <input type="password" id="password" name placeholder="Password" />
-      <button class="submit" v-on:click="datos()">Di que</button>
+      <input type="text" v-model="usuario" placeholder="Username" />
+      <input type="password" v-model="password" placeholder="Password" />
+      <button class="submit">Sign up</button>
     </form>
   </div>
 </template>
 
 <script>
-const express = require("express")
-const router = express.Router()
-const accounts = []
-
- export default {
-   name: "Register",
-  datos: function() {
-    const username = document.getElementById("username")
-    const password = document.getElementById("password")
-    if ( username == undefined || password == undefined ){
-      console.log("llena bien los campos")
-    }
-    else { 
-      router.post("/register", (req, res) => {
-        accounts.push({username: username, password: password})
-        res.status(201).end()
-        console.log("cuenta creada")
-})
-    }
-    return
-  }
- }
+export default {
+  name: "Register",
+  data() {
+    return {
+      usuario: "",
+      password: "",
+      output:""
+    };
+  },
+  methods: { 
+       formSubmit(e) {
+         console.log("A");
+               e.preventDefault();
+               console.log("B");
+               let account = this;
+               this.axios.post('http://localhost:3000/register', {
+                   usuario: this.usuario,
+                   password: this.password
+               })
+               .then(function (response) {
+                   account.output = response.data;
+               })
+               .catch(function (error) {
+                   account.output = error;
+               });
+           }
+        }
+};
 </script>
 
  <style>
@@ -42,7 +48,7 @@ const accounts = []
   width: 100%;
   height: 100%;
   font-family: sans-serif;
-  background-color:#34495e;
+  background-color: #34495e;
 }
 .box {
   width: 300px;
@@ -54,12 +60,13 @@ const accounts = []
   background: #191919;
   text-align: center;
 }
-.box h1{
+.box h1 {
   color: white;
   text-transform: uppercase;
   font-weight: 500;
 }
-.box input[type = "text"], .box input[type="password"]{
+.box input[type="text"],
+.box input[type="password"] {
   border: 0;
   background: none;
   display: block;
@@ -73,7 +80,8 @@ const accounts = []
   border-radius: 24px;
   transition: 0.25s;
 }
-.box input[type = "text"]:focus, .box input[type="password"]:focus{
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
   width: 280px;
   border-color: #2ecc71;
 }
