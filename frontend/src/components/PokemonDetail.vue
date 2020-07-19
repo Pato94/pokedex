@@ -31,32 +31,34 @@
             <h2>Tipo</h2>
           </div>
           <div class="types">
-            <p v-for="type in types" :key="type" class="type" :class="type">{{ type }}</p>
+            <p v-for="type in types" :key="type" class="type" :class="type">
+              {{ type }}
+            </p>
           </div>
         </div>
         <div class="stats">
-          <h2 style="padding-top:10px">Puntos de base</h2>
-        <div class= "grilla">
-          <div class="stat">
-            <span class="nombre">Vida</span>
-            <br />
-            <span class="valor">{{statVida}}</span>
-          </div>
-          <div class="stat">
-            <span class="nombre">Ataque</span>
-            <br />
-            <span class="valor">{{statAtaque}}</span>
-          </div>
-          <div class="stat">
-            <span class="nombre">Defensa</span>
-            <br />
-            <span class="valor">{{statDefensa}}</span>
-          </div>
-          <div class="stat">
-            <span class="nombre">Velocidad</span>
-            <br />
-            <span class="valor">{{statVelocidad}}</span>
-          </div>
+          <h2 style="padding-top: 10px;">Puntos de base</h2>
+          <div class="grilla">
+            <div class="stat">
+              <span class="nombre">Vida</span>
+              <br />
+              <span class="valor">{{ statVida }}</span>
+            </div>
+            <div class="stat">
+              <span class="nombre">Ataque</span>
+              <br />
+              <span class="valor">{{ statAtaque }}</span>
+            </div>
+            <div class="stat">
+              <span class="nombre">Defensa</span>
+              <br />
+              <span class="valor">{{ statDefensa }}</span>
+            </div>
+            <div class="stat">
+              <span class="nombre">Velocidad</span>
+              <br />
+              <span class="valor">{{ statVelocidad }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -67,86 +69,86 @@
 
 <script>
 import axios from "axios";
-const API_URL = process.env.VUE_APP_API_URL
+const API_URL = process.env.VUE_APP_API_URL;
 
-const getPokemonData = id => {
+const getPokemonData = (id) => {
   return axios
     .get(`${API_URL}/pokemons/${id}`)
-    .then(response => response.data);
+    .then((response) => response.data);
 };
 
 export default {
   name: "PokemonDetail",
   data() {
     return {
-      pokemon: null
+      pokemon: null,
     };
   },
   created() {
     console.log(this.$route.params.id);
-    getPokemonData(this.$route.params.id).then(data => (this.pokemon = data));
+    getPokemonData(this.$route.params.id).then((data) => (this.pokemon = data));
   },
   computed: {
-    description: function() {
+    description: function () {
       if (this.pokemon == null) {
         return "";
       }
       return this.pokemon.description;
     },
-    number: function() {
+    number: function () {
       if (this.pokemon === null || !this.pokemon.id) {
         return "";
       }
       let paddedNumber = this.pokemon.id.toString().padStart(3, "0");
       return `#${paddedNumber}`;
     },
-    height: function() {
+    height: function () {
       const pokemon = this.pokemon;
       if (pokemon == null) {
         return "";
       }
       return pokemon.height;
     },
-    category: function() {
+    category: function () {
       const pokemon = this.pokemon;
       if (pokemon == null) {
         return "";
       }
       return pokemon.category;
     },
-    weight: function() {
+    weight: function () {
       const pokemon = this.pokemon;
       if (pokemon == null) {
         return "";
       }
       return pokemon.weight;
     },
-    ability: function() {
+    ability: function () {
       const pokemon = this.pokemon;
       if (pokemon == null) {
         return "";
       }
       return pokemon.ability;
     },
-    types: function() {
+    types: function () {
       if (this.pokemon == null || !this.pokemon.types) {
-        return []
+        return [];
       }
-      return this.pokemon.types.map(t => t.toLowerCase());
+      return this.pokemon.types.map((t) => t.toLowerCase());
     },
-    statVida: function() {
+    statVida: function () {
       return this.pokemon.ps;
     },
-    statAtaque: function() {
+    statAtaque: function () {
       return this.pokemon.attack;
     },
-    statDefensa: function() {
+    statDefensa: function () {
       return this.pokemon.defense;
     },
-    statVelocidad: function() {
+    statVelocidad: function () {
       return this.pokemon.speed;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="caja">
-    <form @submit.prevent="formSubmit()" class="box">
+    <form @submit="formSubmit" class="box">
       <h1>Sign up</h1>
       <input type="text" v-model="usuario" placeholder="Username" />
       <input type="password" v-model="password" placeholder="Password" />
@@ -10,37 +10,39 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Register",
   data() {
     return {
       usuario: "",
       password: "",
-      output:""
+      output: "",
     };
   },
-  methods: { 
-       formSubmit(e) {
-         console.log("A");
-               e.preventDefault();
-               console.log("B");
-               let account = this;
-               this.axios.post('http://localhost:3000/register', {
-                   usuario: this.usuario,
-                   password: this.password
-               })
-               .then(function (response) {
-                   account.output = response.data;
-               })
-               .catch(function (error) {
-                   account.output = error;
-               });
-           }
-        }
+  methods: {
+    formSubmit(e) {
+      console.log("B");
+      e.preventDefault();
+      let account = this;
+      axios
+        .post("http://localhost:3000/register", {
+          username: this.usuario,
+          password: this.password,
+        })
+        .then(function (response) {
+          account.output = response.data;
+        })
+        .catch(function (error) {
+          account.output = error;
+        });
+    },
+  },
 };
 </script>
 
- <style>
+<style>
 .caja {
   position: fixed;
   top: 0;
@@ -50,6 +52,7 @@ export default {
   font-family: sans-serif;
   background-color: #34495e;
 }
+
 .box {
   width: 300px;
   padding: 40px;
@@ -60,11 +63,13 @@ export default {
   background: #191919;
   text-align: center;
 }
+
 .box h1 {
   color: white;
   text-transform: uppercase;
   font-weight: 500;
 }
+
 .box input[type="text"],
 .box input[type="password"] {
   border: 0;
@@ -80,11 +85,13 @@ export default {
   border-radius: 24px;
   transition: 0.25s;
 }
+
 .box input[type="text"]:focus,
 .box input[type="password"]:focus {
   width: 280px;
   border-color: #2ecc71;
 }
+
 .submit {
   border: 0;
   background: none;
@@ -99,6 +106,7 @@ export default {
   transition: 0.25s;
   cursor: pointer;
 }
+
 .submit:hover {
   background: #2ecc71;
 }

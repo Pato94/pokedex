@@ -1,23 +1,23 @@
-import Vue from 'vue'
-import App from './App.vue'
-import VueRouter from 'vue-router'
-import Home from './components/Home.vue'
-import PokemonDetail from './components/PokemonDetail.vue'
-import Register from './components/Register.vue'
+import Vue from "vue";
+import App from "./App.vue";
+import VueRouter from "vue-router";
+import Home from "./components/Home.vue";
+import PokemonDetail from "./components/PokemonDetail.vue";
+import Register from "./components/Register.vue";
 
-Vue.use(VueRouter)
-Vue.config.productionTip = false
+Vue.use(VueRouter);
+Vue.config.productionTip = false;
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   routes: [
-    { path: '/', component: Home },
-    { name: 'pokemon', path: '/pokemon/:id', component: PokemonDetail },
-    { name: 'register', path: '/register', component: Register}
-  ]
-})
+    { path: "/", component: Home },
+    { name: "pokemon", path: "/pokemon/:id", component: PokemonDetail },
+    { name: "register", path: "/register", component: Register },
+  ],
+});
 
 new Vue({
-  render: h => h(App),
+  render: (h) => h(App),
   router,
-}).$mount('#app')
+}).$mount("#app");

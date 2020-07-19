@@ -1,11 +1,13 @@
 <template>
-  <router-link :to="{ name: 'pokemon', params: { id: pokemon.id }}" tag="div">
+  <router-link :to="{ name: 'pokemon', params: { id: pokemon.id } }" tag="div">
     <div class="container">
       <img class="sprite" :src="pokemon.image" />
       <p class="id">{{ number }}</p>
       <p class="name">{{ pokemon.name }}</p>
       <div class="types">
-        <p v-for="type in types" :key="type" class="type" :class="type">{{ type }}</p>
+        <p v-for="type in types" :key="type" class="type" :class="type">
+          {{ type }}
+        </p>
       </div>
     </div>
   </router-link>
@@ -15,17 +17,17 @@
 export default {
   name: "Pokemon",
   props: {
-    pokemon: Object
+    pokemon: Object,
   },
   computed: {
-    types: function() {
-      return this.pokemon.types.map(t => t.toLowerCase());
+    types: function () {
+      return this.pokemon.types.map((t) => t.toLowerCase());
     },
-    number: function() {
+    number: function () {
       let paddedNumber = this.pokemon.id.toString().padStart(3, "0");
       return `#${paddedNumber}`;
-    }
-  }
+    },
+  },
 };
 </script>
 
