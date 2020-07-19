@@ -11,6 +11,7 @@
 
 <script>
 import axios from "axios";
+const API_URL = process.env.VUE_APP_API_URL;
 
 export default {
   name: "Register",
@@ -27,7 +28,7 @@ export default {
       e.preventDefault();
       let account = this;
       axios
-        .post("http://localhost:3000/register", {
+        .post(`${API_URL}/register`, {
           username: this.usuario,
           password: this.password,
         })
