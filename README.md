@@ -1,6 +1,7 @@
 Welcome to the Pokedex Project!
 
 We now have two different sub-projects.
+
 - An express api located under `api/`
 - A VueJS frontend located under `frontend/`
 
