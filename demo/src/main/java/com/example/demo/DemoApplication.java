@@ -1,14 +1,13 @@
 package com.example.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.DefaultSerializerProvider;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,23 +32,35 @@ public class DemoApplication {
     }
 
     @GetMapping(value = "/pokemons", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getJsonProperties() throws IOException {
+    public Pokemon[] getJsonProperties() throws IOException {
+        Pokemon[] pokemons = getPokemons();
+        return pokemons;
+    }
+
+    @GetMapping(value = "/pokemons/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Pokemon getJsonProperties(@PathVariable("id") Integer id) throws IOException {
+        Pokemon[] pokemons = getPokemons();
+
+        Pokemon poke = null;
+        for (Pokemon pokemon : pokemons) {
+            if (pokemon.id == id) {
+                poke = pokemon;
+            }
+        }
+        return poke;
+    }
+
+    private Pokemon[] getPokemons() throws IOException {
         Resource resource = new ClassPathResource("pokes.json");
         InputStream resourceAsStream = resource.getInputStream();
-        String text = new BufferedReader(
+        String textDetail = new BufferedReader(
                 new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8))
                 .lines()
                 .collect(Collectors.joining("\n"));
 
         ObjectMapper mapper = new ObjectMapper();
 
-        Pokemon[] pokemons = mapper.readValue(text, Pokemon[].class);
-
-        System.out.println("amount of pokemons: " + pokemons.length);
-        for (Pokemon pokemon : pokemons) {
-            System.out.println(pokemon.image);
-        }
-
-        return text;
+        Pokemon[] pokemons = mapper.readValue(textDetail, Pokemon[].class);
+        return pokemons;
     }
 }
